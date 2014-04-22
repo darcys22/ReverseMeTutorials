@@ -1,0 +1,13 @@
+﻿Build started 4/21/2014 2:19:21 PM.
+Project "C:\Users\Sean Darcy\Desktop\lafarge-crackme2\keygen\src\Keygen.vcxproj" on node 2 (Build target(s)).
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug\\" /Fd".\Debug\vc110.pdb" /Gd /TC /analyze- /errorReport:prompt keygen.c
+  keygen.c
+c:\users\sean darcy\desktop\lafarge-crackme2\keygen\src\crc.c(17): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+c:\users\sean darcy\desktop\lafarge-crackme2\keygen\src\keygen.c(303): error C2133: 'temp' : unknown size
+Done Building Project "C:\Users\Sean Darcy\Desktop\lafarge-crackme2\keygen\src\Keygen.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.09

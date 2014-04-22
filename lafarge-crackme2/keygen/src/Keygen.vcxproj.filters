@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{2853dbcd-62ef-4edb-a2f4-dca721a749ac}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{0319a2b9-1246-4ba2-922f-cbfc0cb371f2}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{60a09553-d59c-4097-80e0-8615836ad072}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="keygen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="kgen.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Res\About(Small) Normal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\About(Small) Pressed.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\EXIT Button Normal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\EXIT Button Pressed.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\Exit(Small) Normal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\Exit(Small) Pressed.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\GENERATE Button Normal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\GENERATE Button Pressed.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="kgen.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\kgen.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\Minimize(Small) Normal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\Minimize(Small) Pressed.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="kgen.rgn" />
+    <CustomBuild Include="Res\kgen.rgn" />
+  </ItemGroup>
+</Project>
