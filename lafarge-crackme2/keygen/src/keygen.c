@@ -290,25 +290,27 @@ void GenSerial(HWND hWnd)
 	}
 	else
 	{
-	
-		memcpy(szSerial, "blah blah blah", sizeof(szSerial));
+		memcpy(szSerial, szName, sizeof(szSerial));
+		xorforward(szSerial, bArray1);
+
 
 		SetDlgItemText(hWnd, IDC_Serial, szSerial);
 	}
 }
 
-int xorforward(char string[], unsigned char arr[])
+int xorforward(char *stringz[], char *arr[])
 {
 	int y = 0;
-	unsigned char temp[];
-	int length = sizeof(string);
+	char temp[MAX_SERIAL];
+	size_t length = strlen(stringz);
+	size_t len = strlen(arr);
 	int x = 0;
 
-	memcpy(temp, string, length);
+	memcpy(temp, stringz, length);
 
 	for (; x < length; x++ ) {
-		if (y > sizeof(arr)) y = 0;
-		string[x] ^= arr[y];
+		if (y > len) y = 0;
+		stringz[x] ^= arr[y];
 		arr[y] = temp[x];
 		y++;
     };
