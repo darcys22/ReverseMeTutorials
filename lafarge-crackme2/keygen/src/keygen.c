@@ -276,10 +276,10 @@ void GenSerial(HWND hWnd)
 	char szName[MAX_NAME+1];
 	char szSerial[MAX_SERIAL];
 
-	unsigned char bArray1[4] = { 0xAA, 0x89, 0xC4, 0xFE };
-	unsigned char bArray2[4] = { 0x78, 0xF0, 0xD0, 0x03 };
-	unsigned char bArray3[4] = { 0xF7, 0xFD, 0xF4, 0xE7 };
-	unsigned char bArray4[4] = { 0xB5, 0x1B, 0xC9, 0x50 };
+	unsigned char bArray1[5] = { 0xAA, 0x89, 0xC4, 0xFE, 0x00 };
+	unsigned char bArray2[5] = { 0x78, 0xF0, 0xD0, 0x03, 0x00 };
+	unsigned char bArray3[5] = { 0xF7, 0xFD, 0xF4, 0xE7, 0x00 };
+	unsigned char bArray4[5] = { 0xB5, 0x1B, 0xC9, 0x50, 0x00 };
 
 	len = GetDlgItemText(hWnd, IDC_Name, szName, MAX_NAME);
 	if(len < 5)
@@ -290,15 +290,18 @@ void GenSerial(HWND hWnd)
 	}
 	else
 	{
-		memcpy(szSerial, szName, sizeof(szSerial));
+		memcpy(szSerial, szName, len);
 		xorforward(szSerial, bArray1);
+		xorbackward(szSerial, bArray2);
+		xorforward(szSerial, bArray3);
+		xorbackward(szSerial, bArray4);
 
 
 		SetDlgItemText(hWnd, IDC_Serial, szSerial);
 	}
 }
 
-int xorforward(char *stringz[], char *arr[])
+int xorforward(char *stringz, unsigned char *arr)
 {
 	int y = 0;
 	char temp[MAX_SERIAL];
@@ -309,6 +312,26 @@ int xorforward(char *stringz[], char *arr[])
 	memcpy(temp, stringz, length);
 
 	for (; x < length; x++ ) {
+		if (y > len) y = 0;
+		stringz[x] ^= arr[y];
+		arr[y] = temp[x];
+		y++;
+    };
+	return 0;
+
+}
+
+int xorbackward(char *stringz, unsigned char *arr)
+{
+	int y = 0;
+	char temp[MAX_SERIAL];
+	size_t length = strlen(stringz);
+	size_t len = strlen(arr);
+	int x = length;
+
+	memcpy(temp, stringz, length);
+
+	for (; x > 0; x-- ) {
 		if (y > len) y = 0;
 		stringz[x] ^= arr[y];
 		arr[y] = temp[x];
