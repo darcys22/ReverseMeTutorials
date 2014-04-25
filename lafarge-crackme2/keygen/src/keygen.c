@@ -282,11 +282,11 @@ void GenSerial(HWND hWnd)
 	unsigned char bArray4[5] = { 0xB5, 0x1B, 0xC9, 0x50, 0x00 };
 
 	len = GetDlgItemText(hWnd, IDC_Name, szName, MAX_NAME);
-	if(len < 5)
+	if(len < 4)
 	{
 		SetDlgItemText(hWnd,
 			IDC_Serial,
-			"Name needs to be 5 chars or longer...");
+			"Name needs to be 4 chars or longer...");
 	}
 	else
 	{
@@ -295,6 +295,7 @@ void GenSerial(HWND hWnd)
 		xorbackward(szSerial, bArray2);
 		xorforward(szSerial, bArray3);
 		xorbackward(szSerial, bArray4);
+		addfour(szSerial);
 
 
 		SetDlgItemText(hWnd, IDC_Serial, szSerial);
@@ -304,7 +305,7 @@ void GenSerial(HWND hWnd)
 int xorforward(char *stringz, unsigned char *arr)
 {
 	int y = 0;
-	char temp[MAX_SERIAL];
+	unsigned char temp[MAX_SERIAL];
 	size_t length = strlen(stringz);
 	size_t len = strlen(arr);
 	int x = 0;
@@ -324,7 +325,7 @@ int xorforward(char *stringz, unsigned char *arr)
 int xorbackward(char *stringz, unsigned char *arr)
 {
 	int y = 0;
-	char temp[MAX_SERIAL];
+	unsigned char temp[MAX_SERIAL];
 	size_t length = strlen(stringz);
 	size_t len = strlen(arr);
 	int x = length;
@@ -339,4 +340,14 @@ int xorbackward(char *stringz, unsigned char *arr)
     };
 	return 0;
 
+}
+
+int addfour(char *stringz)
+{
+	size_t length =strlen(stringz);
+	int x = 4;
+	for (; x < length; x++){
+		stringz[x-4] += stringz[x];
+	};
+	return 0;
 }
