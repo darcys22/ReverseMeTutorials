@@ -19,8 +19,8 @@
 
 #define MAX_NAME	32
 #define MAX_SERIAL	50
-#define AUTHOR		"Cyclops"
-#define APPINFO		"Keygen template by Cyclops( http://cyclops.ueuo.com )"
+#define AUTHOR		"AAAA"
+#define APPINFO		"Keygen template butchered by Aimless Wanderer"
 
 //Lib files needed for our keygen
 #pragma comment(lib, "comctl32.lib")
@@ -275,7 +275,7 @@ void GenSerial(HWND hWnd)
 	int len;
 	char szName[MAX_NAME+1];
 	char szSerial[MAX_SERIAL];
-	int intSerial;
+	unsigned int *intSerial;
 
 	unsigned char bArray1[5] = { 0xAA, 0x89, 0xC4, 0xFE, 0x00 };
 	unsigned char bArray2[5] = { 0x78, 0xF0, 0xD0, 0x03, 0x00 };
@@ -292,50 +292,80 @@ void GenSerial(HWND hWnd)
 	else
 	{
 		memcpy(szSerial, szName, len+1);
-		xorforward(szSerial, bArray1);
-		xorbackward(szSerial, bArray2);
-		xorforward(szSerial, bArray3);
-		xorbackward(szSerial, bArray4);
-		addfour(szSerial);
+		xorforward(szSerial, bArray1, len);
+		xorbackward(szSerial, bArray2, len);
+		xorforward(szSerial, bArray3, len);
+		xorbackward(szSerial, bArray4, len);
+		addfour(szSerial, len);
 
-		intSerial = (szSerial - '0') % 48;
-		sprintf(szSerial, "%d", intSerial);
+
+		intSerial = (unsigned int *)(szSerial+1);
+		div10(*intSerial, szSerial);
+		reversal(szSerial);
 
 		SetDlgItemText(hWnd, IDC_Serial, szSerial);
 	}
 }
 
-int xorforward(char *stringz, unsigned char *arr)
+int reversal(char *stringz)
+{
+	int x = 0;
+	int y = strlen(stringz) - 1;
+	char z;
+
+	for (; x < y; x++, y--)
+	{
+		z = stringz[x];
+		stringz[x] = stringz[y];
+		stringz[y] = z;
+	}
+}
+
+int div10(unsigned int decimalz, char *stringz)
+{
+	int x = 0;
+
+	memset(&stringz[0], 0, MAX_SERIAL);
+	while (decimalz > 0){
+		stringz[x] = (decimalz % 10 + 48);
+		decimalz /= 10;
+		x++;
+	}	
+	return 0;
+
+}	
+
+int xorforward(char *stringz, unsigned char *arr, size_t length)
 {
 	int y = 0;
 	unsigned char temp[MAX_SERIAL];
-	size_t length = strlen(stringz);
 	size_t len = strlen(arr);
-	int x = 0;
+	int x = 1;
 
+	stringz[length+1] = 0x00;
 	memcpy(temp, stringz, length+1);
 
-	for (; x < length; x++ ) {
+	for (; x <= length; x++ ) {
 		if (y > len-1) y = 0;
 		stringz[x] ^= arr[y];
 		arr[y] = temp[x];
 		y++;
     };
+
 	return 0;
 
 }
 
-int xorbackward(char *stringz, unsigned char *arr)
+int xorbackward(char *stringz, unsigned char *arr, size_t length)
 {
 	int y = 0;
 	unsigned char temp[MAX_SERIAL];
-	size_t length = strlen(stringz);
 	size_t len = strlen(arr);
-	int x = length;
+	int x = length + 1;
 
 	memcpy(temp, stringz, length+1);
 
-	for (; x > 0; x-- ) {
+	for (; x > 1; x-- ) {
 		if (y > len-1) y = 0;
 		stringz[x-1] ^= arr[y];
 		arr[y] = temp[x];
@@ -345,12 +375,13 @@ int xorbackward(char *stringz, unsigned char *arr)
 
 }
 
-int addfour(char *stringz)
+int addfour(char *stringz, size_t length)
 {
-	size_t length = strlen(stringz);
-	int x = 4;
+	//size_t length = strlen(stringz);
+	int x = 5;
 	for (; x < length; x++){
-		stringz[x-4] += stringz[x];
+		stringz[x%4] += stringz[x];
 	};
+	stringz[length+1] = 0x00;
 	return 0;
 }
