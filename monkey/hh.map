@@ -1,0 +1,23 @@
+
+ Start         Length     Name                   Class
+ 0001:00401000 000659D4H  CODE                   CODE
+
+
+  Address         Publics by Value
+
+ 0001:00065580       <-TForm1@Button1Click
+ 0001:000655D5       *TForm1.Edit1:TEdit
+ 0001:000655DB       ->Controls.TControl.GetText(TControl):TCaption;
+ 0001:000655F5       *TForm1.Edit2:TEdit
+ 0001:000655FB       ->Controls.TControl.GetText(TControl):TCaption;
+ 0001:00065606       ->System.@LStrCmp;
+ 0001:0006561B       ->user32.MessageBoxA()
+ 0001:00065630       ->System.TObject.Free(TObject);
+ 0001:00065636       ->System.@HandleFinally;
+ 0001:00065652       ->System.@LStrArrayClr(void;void;Integer);
+ 0001:0006565A       ->System.@LStrClr(void;void);
+ 0001:00065660       ->System.@HandleFinally;
+ 0001:00065678       <-TForm1@Button2Click
+ 0001:00065692       ->user32.MessageBoxA()
+
+Program entry point at 0001:00466960
